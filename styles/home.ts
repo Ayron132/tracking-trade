@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 
 export const Container = styled.div`
-    
+    height: 100%;
     overflow: hidden;
     overflow-y: auto;
     background-color: rgb(246,246,249);

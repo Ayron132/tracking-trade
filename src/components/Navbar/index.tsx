@@ -13,15 +13,27 @@ import {
 } from './style';
 import Input from '../Search';
 
+import { useAuth } from '../../../context/AuthContext';
+import { useRouter } from 'next/router';
+
 type Props = {
     isMenuOpen: boolean;
     setIsMenuOpen: (value: boolean) => void;
     openFullscreen: () => void;
 }
 
-const Navbar = ({ openFullscreen, isMenuOpen, setIsMenuOpen } : Props) => {
+const Navbar = ({ openFullscreen, isMenuOpen, setIsMenuOpen }: Props) => {
 
     const [searchValue, setSearchValue] = useState("");
+
+    const router = useRouter()
+
+    const { logout } = useAuth();
+
+    const handleLogout = () => {
+        logout();
+        router.push("/login");
+    }
 
     return (
         <>
@@ -32,7 +44,7 @@ const Navbar = ({ openFullscreen, isMenuOpen, setIsMenuOpen } : Props) => {
                         data-bs-toggle="offcanvas"
                         data-bs-target="#offcanvas"
                         src='/hamburger.svg' />
-                    <Input value={searchValue} onChange={(e) => setSearchValue(e.target.value)} color="grey"/>
+                    <Input value={searchValue} onChange={(e) => setSearchValue(e.target.value)} color="grey" />
                     <div className='offcanvas offcanvas-start d-sm-none' tabIndex={-1} data-bs-backdrop="false" id="offcanvas">
                         <div className="offcanvas-header">
                             <h5 className="offcanvas-title" id="offcanvasScrollingLabel">Offcanvas with body scrolling</h5>
@@ -47,14 +59,14 @@ const Navbar = ({ openFullscreen, isMenuOpen, setIsMenuOpen } : Props) => {
                     <Icon onClick={openFullscreen} src='/fullscreen.svg' />
                     <Profile>
                         <div className="dropdown">
-                            <Button type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <Button type="button" id="dropdownMenuClickableInside" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" >
                                 <Icon className="profile" src='/profile.png' />
                                 <Name>Raphael</Name>
                                 <ButtonIcon src="/arrowBottom.svg" />
                             </Button>
-                            <ul
+                            <ul aria-labelledby="dropdownMenuClickableInside"
                                 className="border-0 shadow p-2 dropdown-menu dropdown-menu-end mt-3 ">
-                                <Menu onClick={() => console.log('saiu')}>
+                                <Menu onClick={handleLogout}>
                                     <Icon className="logout" src='/onOff.svg' /> Logout
                                 </Menu>
                             </ul>
