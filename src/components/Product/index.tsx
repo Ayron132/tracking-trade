@@ -2,30 +2,31 @@ import React from 'react'
 
 import { Container, Top, Bottom, Image, Title, Description, Evaluation } from './style'
 import About from '../About';
-
 import Rating from '../Rating';
+import { useAuth } from '../../context/AuthContext';
 
 type Props = {}
 
 const Product = (props: Props) => {
+  const { queryProducts } = useAuth();
   return (
     <Container className='mb-4'>
       <Top>
-        <Title>S21 (128GB)</Title>
-        <Description>SAMSUNG</Description>
-        <Description>RRP: R$ 5.999</Description>
+        <Title>{queryProducts && queryProducts.name}</Title>
+        <Description>{queryProducts && queryProducts.brand}</Description>
+        <Description>RRP: R$ {queryProducts && queryProducts.price.toLocaleString()}</Description>
       </Top>
       <Bottom>
         <Evaluation>
           <Description className='black'> Ranking: </Description> 
-          <Rating value={5} />
+          <Rating value={queryProducts && queryProducts.ranking} />
           <About text="Lorem" position="left"/>
         </Evaluation>
         <Description className='black'>
-          Last scraping: 2022-01-06 09:01 AM
+          Last scraping: {queryProducts && queryProducts.lastScraping}
         </Description>
       </Bottom>
-      <Image />
+      <Image src={queryProducts && queryProducts.pictureUrl}/>
     </Container>
   )
 }

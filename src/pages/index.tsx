@@ -9,7 +9,7 @@ import Product from '../components/Product';
 
 import { Container, Content } from '../../styles/home';
 import { useRouter } from 'next/router';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../context/AuthContext';
 
 const Home = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

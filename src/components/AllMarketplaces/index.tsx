@@ -1,31 +1,31 @@
 import React, { useState, useMemo } from 'react'
 import Search from '../Search'
-import Author from './Author';
+import Store from './Store';
 
-import { AuthorContainer } from './style';
+import { Container } from './style';
 
 
-type Props = {}
+type Props = {
+    data: [
+        {
+            name: string;
+            pictureUrl: string;
+        }
+    ]
+}
 
-const AllMarketplaces = (props: Props) => {
+const AllMarketplaces = ({ data }: Props) => {
 
-    const items = [{
-        name: "a"
-    }, {
-        name: 'b'
-    }]
-
-    const [selectedList, setSelectedList] = useState<Array<{name: string}>>([{
+    const [selectedList, setSelectedList] = useState<Array<{ name: string }>>([{
         name: ""
     }]);
 
-    const [search, setSearch] = useState(false);
     const [searchValue, setSearchValue] = useState("");
 
     const filtered = useMemo(() => {
         const lowerSearch = searchValue.toLowerCase();
-        return items.filter((item) => item.name.toLowerCase().includes(lowerSearch))
-    }, [searchValue, items])
+        return data.filter((item) => item.name.toLowerCase().includes(lowerSearch))
+    }, [searchValue, data])
 
     return (
         <>
@@ -41,11 +41,11 @@ const AllMarketplaces = (props: Props) => {
                         </div>
                         <div className="modal-body">
                             <Search value={searchValue} onChange={(e) => setSearchValue(e.target.value)} color="white" />
-                            <AuthorContainer>
+                            <Container>
                                 {filtered && filtered.map((item, index) => (
-                                    <Author key={index} setSelectedList={setSelectedList} selectedList={selectedList} item={item} />
+                                    <Store key={index} setSelectedList={setSelectedList} selectedList={selectedList} item={item} />
                                 ))}
-                            </AuthorContainer>
+                            </Container>
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>

@@ -6,6 +6,7 @@ interface Props {
 
 export const Container = styled.div`
   width: 100%;
+  height: calc(100% - 1.5rem - 15rem);
   border-radius: 8px;
   background-color: #fff;
   padding: 20px;
@@ -15,7 +16,6 @@ export const Content = styled.div`
     height: 100%;
     display: flex;
     flex-direction: column;
-    
 `
 export const Icon = styled.img`
     width: 1.2rem;
@@ -34,6 +34,7 @@ export const Percentage = styled.div<Props>`
     align-items: center;
     justify-content: center;
     border-radius: 8px;
+    font-weight: bold;
     background-color: rgba(255, 99, 71, ${props => props.colorPercentage});
 `
 export const Description = styled.div`

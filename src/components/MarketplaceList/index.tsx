@@ -1,38 +1,35 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useAuth } from '../../context/AuthContext'
 import About from '../About'
 import Calendar from '../Calendar'
 
 import { Container, Content, Icon, Item, Percentage, Description, PriceAndDate, Select, Table } from './style'
 
-type Props = {}
+type Props = {
+    name: string;
+    presence: number;
+    ip: number | string;
+    ipRRP: number;
+    sp: number | string;
+    spRRP: number;
+    view: string;
+}
 
-const MarketplaceList = (props: Props) => {
-    const [currentDate, setCurrentDate] = useState({
-        year: "2020",
-        month: "01",
-        day: "06",
-    })
+const MarketplaceList = () => {
+   
 
-    const data = [{
-        name: 'americanas',
-        presence: 80,
-        sp: '3.513',
-        rrpSp: 40,
-        ip: null,
-        rrpIp: 0,
-        link: 'a',
-    },
-    {
-        name: 'havan',
-        presence: 80.69,
-        sp: '3.513',
-        rrpSp: 10,
-        ip: 50,
-        rrpIp: 95,
-        link: null,
-    }
-    ]
+    const { marketplaceList } = useAuth();
 
+    const data = marketplaceList.list
+
+    const date = marketplaceList.date.split("-");
+
+    const [currentDate, setCurrentDate] = useState(
+        {
+            year: date[0],
+            month: date[1],
+            day: date[2],
+        });
     return (
         <Container>
             <Content>
@@ -44,7 +41,7 @@ const MarketplaceList = (props: Props) => {
                     <div className='d-flex mb-4'>
                         <PriceAndDate>
                             Date
-                            <button className="btn btn-primary text-nowrap  " type="button" id="dropdownMenuClickableInside" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">{`${currentDate.year}-${currentDate.month}-${currentDate.day}`}</button>   
+                            <button className="btn btn-primary text-nowrap  " type="button" id="dropdownMenuClickableInside" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">{`${currentDate.year}-${currentDate.month}-${currentDate.day}`}</button>
                             <ul className="dropdown-menu p-0" aria-labelledby="dropdownMenuClickableInside">
                                 <li>
                                     <Calendar currentDate={currentDate} setCurrentDate={setCurrentDate} />
@@ -60,7 +57,7 @@ const MarketplaceList = (props: Props) => {
                             </Select>
                         </PriceAndDate>
                     </div>
-                </Description>  
+                </Description>
                 <Table className="table-responsive">
                     <table className="table">
                         <thead>
@@ -75,7 +72,7 @@ const MarketplaceList = (props: Props) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {data && data.map((item, index) => (
+                            {data && data.map((item: Props, index: number) => (
                                 <tr key={index}>
                                     <td >
                                         {item.name}
@@ -84,20 +81,20 @@ const MarketplaceList = (props: Props) => {
                                         <Item>{`${item.presence}%`}</Item>
                                     </td>
                                     <td>
-                                        <Item>{item.sp}</Item>
+                                        <Item>{item.sp.toLocaleString()}</Item>
                                     </td>
                                     <td>
-                                        <Percentage colorPercentage={(item.rrpSp / 100)}>{`${item.rrpSp}%`}</Percentage>
+                                        <Percentage colorPercentage={(item.spRRP / 100)}>{`${item.spRRP}%`}</Percentage>
                                     </td>
                                     <td>
-                                        <Item>{item.ip}</Item>
+                                        <Item>{item.ip.toLocaleString()}</Item>
                                     </td>
                                     <td>
-                                        <Percentage colorPercentage={(item.rrpIp / 100)}>{`${item.rrpIp}%`}</Percentage>
+                                        <Percentage colorPercentage={(item.ipRRP / 100)}>{`${item.ipRRP}%`}</Percentage>
                                     </td>
                                     <td>
                                         <Item>
-                                            {item.link ?
+                                            {item.view ?
                                                 <a href='https://www.google.com.br'><Icon src='/launch.svg' /></a>
                                                 :
                                                 <Icon src='/noLink.svg' />

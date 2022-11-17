@@ -110,6 +110,9 @@ const Calendar = ({ currentDate, setCurrentDate }: Props) => {
   }
 
   const saveDate = (day: Day) => {
+    if(day == null){
+      return
+    }
     setSelectedDay(day);
     setCurrentDate({
       year: `${selectedYear}`,

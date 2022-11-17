@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { Container, Title, DateButton } from './style'
 import Calendar from '../Calendar'
 import AllMarketplaces from '../AllMarketplaces'
+import { useAuth } from '../../context/AuthContext'
 
 type Props = {}
 
@@ -13,6 +14,8 @@ const Options = (props: Props) => {
         month: "01",
         day: "06",
     })
+
+    const { marketplaces } = useAuth();
 
     return (
         <Container className='mb-4'>
@@ -52,7 +55,7 @@ const Options = (props: Props) => {
                     </div>
                     <div className="col-sm">
                         <Title>Marketplaces</Title> 
-                        <AllMarketplaces />
+                        <AllMarketplaces data={marketplaces.marketpalces}/>
                     </div>
                 </div>
             </div>

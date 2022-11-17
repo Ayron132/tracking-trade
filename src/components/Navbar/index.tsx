@@ -13,7 +13,7 @@ import {
 } from './style';
 import Input from '../Search';
 
-import { useAuth } from '../../../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 import { useRouter } from 'next/router';
 
 type Props = {
@@ -28,7 +28,7 @@ const Navbar = ({ openFullscreen, isMenuOpen, setIsMenuOpen }: Props) => {
 
     const router = useRouter()
 
-    const { logout } = useAuth();
+    const { user, logout } = useAuth();
 
     const handleLogout = () => {
         logout();
@@ -60,8 +60,8 @@ const Navbar = ({ openFullscreen, isMenuOpen, setIsMenuOpen }: Props) => {
                     <Profile>
                         <div className="dropdown">
                             <Button type="button" id="dropdownMenuClickableInside" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" >
-                                <Icon className="profile" src='/profile.png' />
-                                <Name>Raphael</Name>
+                                <Icon className="profile" src={user && user.image} />
+                                <Name>{user && user.name}</Name>
                                 <ButtonIcon src="/arrowBottom.svg" />
                             </Button>
                             <ul aria-labelledby="dropdownMenuClickableInside"

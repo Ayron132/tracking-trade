@@ -1,5 +1,8 @@
 import styled from "styled-components";
 
+interface Props {
+  src: string;
+}
 
 export const Container = styled.div`
   width: 100%;
@@ -27,11 +30,12 @@ export const Bottom = styled.div`
   justify-content: space-between;
   align-items: flex-end;
 `
-export const Image = styled.div`
+export const Image = styled.div<Props>`
   width: 6rem;
   height: 6rem;
+  border-radius: 8px;
   background-color: #fff;
-  background-image: url("/phone.png");
+  background-image: url(${props => props.src});
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

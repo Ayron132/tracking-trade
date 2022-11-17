@@ -34,6 +34,6 @@ export const Content = styled.div`
     }
 `
 export const Title = styled.h4`
-    color: blue;
+    color: #387AE7;
     margin-bottom: 1.5rem;
 `

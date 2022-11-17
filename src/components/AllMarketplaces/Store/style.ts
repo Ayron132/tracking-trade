@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface Props {
+    src: string;
+}
+
 export const Name = styled.span`
     font-size: 18px;
     color: #808080;
@@ -50,11 +54,11 @@ export const Icon = styled.img`
     height: 20px;
     margin-right: 30px;
 `
-export const Logo = styled.div`
-    width: 4rem;
-    height: 4rem;
+export const Logo = styled.div<Props>`
+    width: 3rem;
+    height: 3rem;
     margin-right: 20px;
-    background-image: url("/americanas.jpg");
+    background-image: url(${props => props.src});
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -63,8 +67,10 @@ export const Main = styled.div`
     padding-top: 20px;
     padding-bottom: 20px;
     & + &{  
-        border-bottom: 1px solid #C8C8C8;
         border-top: 1px solid #C8C8C8;
+    }
+    &:last-child{
+        border-bottom: 1px solid #C8C8C8;
     }
  
 `

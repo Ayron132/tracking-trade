@@ -40,7 +40,7 @@ const Temperature = (props: Props) => {
       }
     },
     title: {
-      text: "Price",
+      text: "Temperature",
       offsetX: 40,
       align: "left",
       style: {

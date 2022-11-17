@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react'
+import { isMapIterator } from 'util/types';
 
-import { Main ,Container, Checkbox, Logo } from './style'
+import { Main, Container, Checkbox, Logo } from './style'
 
 type Props = {
     item: {
         name: string;
+        pictureUrl: string;
     };
     selectedList: Array<{
-        name: string
+        name: string;
     }>;
     setSelectedList: (list: Array<{
-        name: string
+        name: string;
     }>) => void;
 }
 
-const Author = ({ item, setSelectedList, selectedList }: Props) => {
+const Store = ({ item, setSelectedList, selectedList }: Props) => {
     const [isChecked, setIsChecked] = useState(false);
 
     const filterList = (list: { name: string }[], name: string) => {
@@ -48,11 +50,11 @@ const Author = ({ item, setSelectedList, selectedList }: Props) => {
         <Main>
             <Checkbox checked={isChecked} onChange={handleCheck} name={item.name} id={item.name} />
             <Container htmlFor={item.name} >
-                <Logo />
+                <Logo src={item.pictureUrl}/>
                 {item.name}
             </Container>
         </Main>
     )
 }
 
-export default Author
+export default Store

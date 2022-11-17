@@ -7,34 +7,44 @@ const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 import { Container, Content } from "./style";
 
-type Props = {}
+type Props = {
+  data: {
+    labels: string[];
+    series: Array<{
+      name: string;
+      data: number[];
+    }>;
+    subtitle: string;
+    title: string;
+  }
+}
 
-const Price = (props: Props) => {
+const Price = ({ data }: Props) => {
 
   const series = [{
-    name: 'VAR',
+    name: data.series[0].name,
     type: 'column',
-    data: [41, 41, 33, 40, 33, 33, 41, 0, 41, 41, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    data: data.series[0].data
   },
   {
-    name: 'RRP',
+    name: data.series[1].name,
     type: 'line',
-    data: [5999, 5999, 5999, 5999, 5999, 5999, 5999, 5999, 5999, 5999, 5999, 5999, 5999, 5999, 5999, 5999, 5999, 5999, 5999, 5999, 5999, 5999, 5999, 5999]
+    data: data.series[1].data
   },
   {
-    name: 'Mode',
+    name: data.series[2].name,
     type: 'line',
-    data: [4199, 5999, 4599, 5999, 5999, 5999, 4377, 0, 4599, 3533, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    data:  data.series[2].data
   },
   {
-    name: 'Max',
+    name: data.series[3].name,
     type: 'line',
-    data: [3533, 3515, 3999, 3599, 3999, 3999, 3533, 0, 3512, 3533, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    data:  data.series[3].data
   },
   {
-    name: 'Min',
+    name: data.series[4].name,
     type: 'line',
-    data: [3533, 3500, 3533, 3599, 3513, 3430, 3533, 0, 3512, 3533, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    data:  data.series[4].data
   }]
 
   const options: ApexOptions = {
@@ -49,7 +59,7 @@ const Price = (props: Props) => {
       }
     },
     title: {
-      text: "Price",
+      text: data.title,
       offsetX: 40,
       align: "left",
       style: {
@@ -58,7 +68,7 @@ const Price = (props: Props) => {
       }
     },
     subtitle: {
-      text: "Spot price",
+      text: data.subtitle,
       offsetY: 20,
       offsetX: 40,
       align: "left",
@@ -69,7 +79,7 @@ const Price = (props: Props) => {
     },
     dataLabels: {
       enabled: true,
-      formatter: function (legendName: number, opts: any){
+      formatter: function (legendName: number, opts: any) {
         if (opts.seriesIndex === 0) {
           return legendName > 1 ? legendName + '%' : "";
         }
@@ -117,9 +127,7 @@ const Price = (props: Props) => {
       }
     },
 
-    labels: ["0:00", "1:00", "2:00", "3:00", "4:00", "5:00", "6:00",
-      "7:00", "8:00", "9:00", "10:00", "11:00", "12:00", "13:00", "14:00",
-      "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"],
+    labels: data.labels,
     xaxis: {
       tickPlacement: 'on',
     },

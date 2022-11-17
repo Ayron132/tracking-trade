@@ -24,7 +24,7 @@ const Presence = (props: Props) => {
             height: 350
         },
         title: {
-            text: "Price",
+            text: "Presence",
             offsetX: 40,
             align: "left",
             style: {
