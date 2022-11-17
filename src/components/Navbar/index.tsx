@@ -47,11 +47,10 @@ const Navbar = ({ openFullscreen, isMenuOpen, setIsMenuOpen }: Props) => {
                     <Input value={searchValue} onChange={(e) => setSearchValue(e.target.value)} color="grey" />
                     <div className='offcanvas offcanvas-start d-sm-none' tabIndex={-1} data-bs-backdrop="false" id="offcanvas">
                         <div className="offcanvas-header">
-                            <h5 className="offcanvas-title" id="offcanvasScrollingLabel">Offcanvas with body scrolling</h5>
                             <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                         </div>
                         <div className="offcanvas-body">
-                            <p>Try scrolling the rest of the page to see this option in action.</p>
+                            <p>Navbar mobile</p>
                         </div>
                     </div>
                 </MenuAndSearch>

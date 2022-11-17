@@ -38,7 +38,7 @@ const Login = (props: Props) => {
             try {
                 await login(data.email, data.password)
                 setInvalidCredentials(false)
-                router.replace("/");
+                router.push("/")
             } catch (error) {
                 setInvalidCredentials(true)
             }

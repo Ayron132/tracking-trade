@@ -11,14 +11,14 @@ type Props = {}
 
 const Graphics = (props: Props) => {
 
-  const { price } = useAuth();
-  
+  const { price, temperature } = useAuth();
+
   return (
     <Container>
         <Price data={price}/>
         <Price data={price}/>    
-        <Temperature />
-        <Temperature />
+        <Temperature data={temperature}/>
+        <Temperature data={temperature}/>
         <Presence />
         <Presence />
     </Container>

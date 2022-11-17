@@ -17,6 +17,7 @@ export const AuthContextProvider = ({
   const [marketplaceList, setMarketplaceList] = useState<any>(null);
   const [marketplaces, setMarketplaces] = useState<any>(null);
   const [price, setPrice] = useState<any>(null);
+  const [temperature, setTemperature] = useState<any>(null);
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -54,6 +55,11 @@ export const AuthContextProvider = ({
         if (priceSnap.exists()) {
           setPrice(priceSnap.data());
         }
+        const temperature = doc(db, "Data", "query_temperature_chart");
+        const temperatureSnap = await getDoc(temperature);
+        if (temperatureSnap.exists()) {
+          setTemperature(temperatureSnap.data());
+        }
       } else {
         setUser(null)
       }
@@ -74,7 +80,7 @@ export const AuthContextProvider = ({
   }
 
   return (
-    <AuthContext.Provider value={{ user, queryProducts, marketplaceList, marketplaces, price, login, logout }}>
+    <AuthContext.Provider value={{ user, queryProducts, marketplaceList, marketplaces, price, temperature, login, logout }}>
       {loading ? null : children}
     </AuthContext.Provider>
   )
