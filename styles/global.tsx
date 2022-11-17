@@ -24,14 +24,17 @@ const GlobalStyle = createGlobalStyle`
         width: 100vw;
         background-color: rgb(246,246,249);
         overflow-x: hidden;
-        &::-webkit-scrollbar{
-        width: 5px;
-        
+        @media (min-width: 576px) {
+            &::-webkit-scrollbar{
+            width: 5px;
+            
+            }
+            &::-webkit-scrollbar-thumb{
+                background-color: #76798E;
+                border-radius: 20px;
+            } 
         }
-        &::-webkit-scrollbar-thumb{
-            background-color: #76798E;
-            border-radius: 20px;
-        }  
+        
     }
 
 

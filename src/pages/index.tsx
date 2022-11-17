@@ -53,7 +53,7 @@ const Home = () => {
                 <Product />
                 <MarketplaceList />
               </div>
-              <div className='col-12 col-md-8'>
+              <div className='col-12 col-md-8 h-100'>
                 <Options />
                 <Graphics />
               </div>
