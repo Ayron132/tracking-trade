@@ -24,7 +24,7 @@ const GlobalStyle = createGlobalStyle`
         width: 100vw;
         background-color: rgb(246,246,249);
         overflow-x: hidden;
-        @media (min-width: 576px) {
+        @media (min-width: 768px) {
             &::-webkit-scrollbar{
             width: 5px;
             
